@@ -8,14 +8,21 @@ namespace COMP229_F2016_MidTerm_300705307.Models
     public partial class TodoContext : DbContext
     {
         public TodoContext()
-            : base("name=TodoConnection")
+            : base("name=TodoContext")
         {
         }
 
-        public virtual DbSet<Todo> Todos { get; set; }
+        public virtual DbSet<TodoTable> TodoTables { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<TodoTable>()
+                .Property(e => e.TodoDescription)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<TodoTable>()
+                .Property(e => e.TodoNotes)
+                .IsUnicode(false);
         }
     }
 }
